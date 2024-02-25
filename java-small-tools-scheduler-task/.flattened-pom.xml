@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.qyxa</groupId>
+        <artifactId>java-small-tools</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>java-small-tools-scheduler-task</artifactId>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- 内部依赖 -->
+        <dependency>
+            <groupId>com.qyxa</groupId>
+            <artifactId>java-small-tools-component</artifactId>
+        </dependency>
+        <!-- 引入 ksboot runner相关依赖，以下依赖按需引入，需要开发什么类型runner引入什么类型，其余的删除 -->
+
+        <!-- kafka consumer 所需依赖 -->
+        <dependency>
+            <groupId>com.kuaishou.infra.boot</groupId>
+            <artifactId>ks-boot-starter-runner-kafka</artifactId>
+        </dependency>
+        <!-- task 所需依赖 -->
+        <dependency>
+            <groupId>com.kuaishou.infra.boot</groupId>
+            <artifactId>ks-boot-starter-runner-task</artifactId>
+        </dependency>
+        <!-- kess-rpc 所需依赖 -->
+        <dependency>
+            <groupId>com.kuaishou.infra.boot</groupId>
+            <artifactId>ks-boot-starter-krpc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kuaishou.infra.boot</groupId>
+            <artifactId>ks-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.9.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kuaishou.dp</groupId>
+            <artifactId>asset-lake-sdk</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- 更改打包之后的 jar name，去掉 version 信息，便于部署 -->
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.kuaishou.infra.boot.loader.DoNotMove</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
